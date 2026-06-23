@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>盛田教研｜國中落點地圖</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <aside class="sidebar">
+        <header class="topbar">
+          <img class="brand-logo" src="./assets/logo-avatar.png" alt="盛田教研 Logo" />
+          <div class="brand-copy">
+            <span>盛田教研</span>
+            <h1>國中落點地圖</h1>
+            <p id="summaryText">讀取資料中</p>
+          </div>
+        </header>
+
+        <section class="controls" aria-label="篩選">
+          <label class="search">
+            <span>搜尋</span>
+            <input id="searchInput" type="search" placeholder="學校、科系、地址" />
+          </label>
+          <div class="segments" role="group" aria-label="資料範圍">
+            <button class="segment active" data-filter="main" type="button">台中高中職</button>
+            <button id="openTableEditor" class="segment editor-trigger" type="button">編輯資料</button>
+          </div>
+          <label class="toggle">
+            <input id="exactOnly" type="checkbox" />
+            <span>只看精確定位</span>
+          </label>
+        </section>
+
+        <section class="metrics" aria-label="統計">
+          <div>
+            <span id="mappedCount">0</span>
+            <small>地圖點位</small>
+          </div>
+          <div>
+            <span id="recordCount">0</span>
+            <small>成績筆數</small>
+          </div>
+          <div>
+            <span id="avgPoint">-</span>
+            <small>平均積點</small>
+          </div>
+        </section>
+
+        <section class="list-wrap" aria-label="學校清單">
+          <div class="list-head">
+            <strong>學校</strong>
+            <span id="visibleCount">0</span>
+          </div>
+          <div id="schoolList" class="school-list"></div>
+        </section>
+      </aside>
+
+      <section class="map-shell">
+        <div id="map"></div>
+        <article id="detailPanel" class="detail-panel empty">
+          <div class="detail-placeholder">
+            <strong>點選地圖上的學校</strong>
+            <span>查看科系、平均積點、最低錄取與歷年成績。</span>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <dialog id="editDialog" class="edit-dialog">
+      <form id="editForm" method="dialog" class="edit-form">
+        <header class="edit-head">
+          <h2>編輯資料</h2>
+          <button id="closeEditor" class="icon-button" type="button" aria-label="關閉">×</button>
+        </header>
+        <div class="edit-grid">
+          <label>
+            <span>學校名稱</span>
+            <input id="editSchool" name="school" />
+          </label>
+          <label>
+            <span>地址</span>
+            <input id="editAddress" name="address" />
+          </label>
+          <label>
+            <span>緯度</span>
+            <input id="editLat" name="lat" inputmode="decimal" />
+          </label>
+          <label>
+            <span>經度</span>
+            <input id="editLng" name="lng" inputmode="decimal" />
+          </label>
+          <label>
+            <span>定位狀態</span>
+            <select id="editAccuracy" name="accuracy">
+              <option value="exact">精確</option>
+              <option value="approximate">近似</option>
+              <option value="missing">未定位</option>
+            </select>
+          </label>
+        </div>
+        <label class="json-editor">
+          <span>科系與成績資料</span>
+          <textarea id="editDepartments" spellcheck="false"></textarea>
+        </label>
+        <p id="editError" class="edit-error" aria-live="polite"></p>
+        <footer class="edit-actions">
+          <button id="resetEdit" type="button">還原此校</button>
+          <button id="saveEdit" class="primary" type="submit">儲存</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="passwordDialog" class="edit-dialog password-dialog">
+      <form id="passwordForm" class="edit-form">
+        <header class="edit-head">
+          <h2>輸入編輯密碼</h2>
+          <button id="closePassword" class="icon-button" type="button" aria-label="關閉">×</button>
+        </header>
+        <label class="password-field">
+          <span>密碼</span>
+          <input id="editPassword" type="password" autocomplete="current-password" />
+        </label>
+        <p id="passwordError" class="edit-error" aria-live="polite"></p>
+        <footer class="edit-actions">
+          <button id="cancelPassword" type="button">取消</button>
+          <button id="unlockEditor" class="primary" type="submit">解鎖</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="tableEditor" class="table-editor">
+      <form id="tableEditorForm" method="dialog" class="table-editor-form">
+        <header class="edit-head">
+          <h2>表格編輯</h2>
+          <button id="closeTableEditor" class="icon-button" type="button" aria-label="關閉">×</button>
+        </header>
+        <div class="table-toolbar">
+          <button id="addTableRow" type="button">新增列</button>
+          <button id="deleteSelectedRows" type="button">刪除勾選列</button>
+          <span id="tableEditStatus">可直接像 Excel 一樣編輯儲存格</span>
+        </div>
+        <div class="sheet-wrap">
+          <table id="editableSheet" class="editable-sheet">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p id="tableEditError" class="edit-error" aria-live="polite"></p>
+        <footer class="edit-actions">
+          <button id="reloadTableData" type="button">重新載入</button>
+          <button id="saveTableData" class="primary" type="submit">儲存到網頁資料</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,664 @@
+{
+  "(404009)臺中市北區育才街2號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(403002)臺中市西區自由路一段95號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(428312)臺中市大雅區平和路227號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(412011)臺中市大里區東榮路369號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(407334)臺中市西屯區寧夏路240號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(408021)臺中市南屯區公益路二段298號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(406038)臺中市北屯區四平路161號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(404024)臺中市北區中清路一段606號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(404021)臺中市北區英士路109號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(401221)臺中市東區台中路283號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(407031)臺中市西屯區漢翔路188號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(403023)臺中市西區博館路166號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(411036)臺中市太平區長億里長億六街1號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(406003)臺中市北屯區景賢六路200號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(412024)臺中市大里區國中路365號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(407224)臺中市西屯區臺灣大道四段1727號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(402023)臺中市南區高工路191號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(411012)臺中市太平區廍仔坑路26號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(401207)臺中市東區和平街50號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(414303)臺中市烏日區中山路一段497號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(436317)臺中市清水區中山路90號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(420302)臺中市豐原區水源路150號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(435306)臺中市梧棲區文昌路400號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(437001)臺中市大甲區中山路一段720號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(412001)臺中市大里區中興路二段380號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(413010)臺中市霧峰區中正路1222號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(437024)臺中市大甲區開元路71號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(434011)臺中市龍井區三港路130號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(433029)臺中市沙鹿區臺灣大道七段823號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(437001)臺中市大甲區甲東路512號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(420305)臺中市豐原區圓環南路50號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(406005)臺中市北屯區軍福十八路328號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(426015)臺中市新社區中和街三段國中巷10號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(412016)臺中市大里區樹王路342號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(412025)臺中市大里區中湖路100號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(427009)臺中市潭子區弘文街100號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(427019)臺中市潭子區潭興路一段165巷320號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(421303)臺中市后里區三豐路三段968號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(427003)臺中市潭子區潭興路一段168號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(423311)臺中市東勢區東關路六段1328號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(411038)臺中市太平區東平路18號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(413006)臺中市霧峰區萊園路91號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(429003)臺中市神岡區中山路627號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(407001)臺中市西屯區東大路一段555號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(402006)臺中市南區明德街84號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(404426)臺中市北區健行路111號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(408285)臺中市南屯區嶺東路2號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "(423009)臺中市東勢區東崎路四段399號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::臺中第一高級中學::(404009)臺中市北區育才街2號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::臺中第一高級中等學校::(404009)臺中市北區育才街2號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::臺中女子高級中學::(403002)臺中市西區自由路一段95號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::臺中女子高級中等學校::(403002)臺中市西區自由路一段95號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::國立中科實驗高級中學::(428312)臺中市大雅區平和路227號": {
+    "lat": 24.2294095,
+    "lng": 120.6249856,
+    "display": "中科實中, 227, 平和路, 秀山里, 大雅區, 臺中市, 42878, 臺灣"
+  },
+  "school::國立中興大學附屬高級中學::(412011)臺中市大里區東榮路369號": {
+    "lat": 24.1090385,
+    "lng": 120.6830749,
+    "display": "興大附中, 369, 東榮路, 東興里, 大里區, 田寮, 臺中市, 412, 臺灣"
+  },
+  "school::文華高級中等學校::(407334)臺中市西屯區寧夏路240號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::文華高級中學::(407334)臺中市西屯區寧夏路240號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::惠文高級中學::(408021)臺中市南屯區公益路二段298號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::衛道高級中學::(406038)臺中市北屯區四平路161號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立衛道高級中學::(406038)臺中市北屯區四平路161號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立曉明女子高級中學::(404024)臺中市北區中清路一段606號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::臺中第二高級中等學校::(404021)臺中市北區英士路109號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::曉明女子高級中學::(404024)臺中市北區中清路一段606號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::國立中興大學附屬臺中高級農業職業學校::(401221)臺中市東區台中路283號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::臺中第二高級中學::(404021)臺中市北區英士路109號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::西苑高級中學::(407031)臺中市西屯區漢翔路188號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::忠明高級中學::(403023)臺中市西區博館路166號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::長億高級中學::(411036)臺中市太平區長億里長億六街1號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::東山高級中學::(406003)臺中市北屯區景賢六路200號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::臺中市立大里高級中學::(412024)臺中市大里區國中路365號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::東海大學附屬高級中等學校::(407224)臺中市西屯區臺灣大道四段1727號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::臺中工業高級中等學校::(402023)臺中市南區高工路191號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::國立中興大學附屬農業職業學校::(401221)臺中市東區台中路283號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立華盛頓高級中學::(411012)臺中市太平區廍仔坑路26號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::臺中家事商業高級中等學校::(401207)臺中市東區和平街50號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立明道高級中學::(414303)臺中市烏日區中山路一段497號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::清水高級中等學校::(436317)臺中市清水區中山路90號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::豐原高級中學::(420302)臺中市豐原區水源路150號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::中港高級中學::(435306)臺中市梧棲區文昌路400號": {
+    "lat": 22.5346411,
+    "lng": 120.3637141,
+    "display": "中化小港廠, 中林路機車專用道, 高雄臨海產業園區, 鳳森里, 小港區, 中林子, 高雄市, 812, 臺灣"
+  },
+  "school::豐原高級中等學校::(420302)臺中市豐原區水源路150號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::大甲高級中等學校::(437001)臺中市大甲區中山路一段720號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立立人高級中學::(412001)臺中市大里區中興路二段380號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::霧峰農業工業高級中等學校::(413010)臺中市霧峰區中正路1222號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::大甲工業高級中等學校::(437024)臺中市大甲區開元路71號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::龍津高級中等學校::(434011)臺中市龍井區三港路130號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::立人高級中學::(412001)臺中市大里區中興路二段380號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::沙鹿工業高級中等學校::(433029)臺中市沙鹿區臺灣大道七段823號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::中興大學附屬農業職業學校::(401221)臺中市東區台中路283號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::華盛頓高級中學::(411012)臺中市太平區廍仔坑路26號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立致用高級中學::(437001)臺中市大甲區甲東路512號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::豐原商業高級中等學校::(420305)臺中市豐原區圓環南路50號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立葳格高級中學::(406005)臺中市北屯區軍福十八路328號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::明道高級中學::(414303)臺中市烏日區中山路一段497號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::新社高級中學::(426015)臺中市新社區中和街三段國中巷10號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::僑泰高級中學::(412016)臺中市大里區樹王路342號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::青年高級中學::(412025)臺中市大里區中湖路100號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立弘文高級中學::(427009)臺中市潭子區弘文街100號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立常春藤高級中學::(427019)臺中市潭子區潭興路一段165巷320號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::后綜高級中學::(421303)臺中市后里區三豐路三段968號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::臺中工業高級中等學校進修部::(402023)臺中市南區高工路191號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立大明高級中學::(427003)臺中市潭子區潭興路一段168號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::東勢工業高級中等學校::(423311)臺中市東勢區東關路六段1328號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::常春藤高級中學::(427019)臺中市潭子區潭興路一段165巷320號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::光華高級工業職業學校::(411038)臺中市太平區東平路18號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立明台高級中學::(413006)臺中市霧峰區萊園路91號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::神岡工業高級中等學校::(429003)臺中市神岡區中山路627號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::大明高級中學::(427003)臺中市潭子區潭興路一段168號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::豐原商業高級中等學校進修部::(420305)臺中市豐原區圓環南路50號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立青年高級中學::(412025)臺中市大里區中湖路100號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::弘文高級中學::(427009)臺中市潭子區弘文街100號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立僑泰高級中學::(412016)臺中市大里區樹王路342號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立青年高級中學進修部::(412025)臺中市大里區中湖路100號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立大明高級中等學校::(427003)臺中市潭子區潭興路一段168號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::明台高級中學::(413006)臺中市霧峰區萊園路91號": {
+    "lat": 24.1224104,
+    "lng": 120.60241,
+    "display": "XA-3雷鳴式(0902), 集合場, 學田里, 烏日區, 烏日高鐵特區, 臺中市, 414, 臺灣"
+  },
+  "school::宜寧高級中學::(407001)臺中市西屯區東大路一段555號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立明德高級中學::(402006)臺中市南區明德街84號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::新民高級中學進修部::(404426)臺中市北區健行路111號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立宜寧高級中學::(407001)臺中市西屯區東大路一段555號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::致用高級中學::(437001)臺中市大甲區甲東路512號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立嶺東高級中學::(408285)臺中市南屯區嶺東路2號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::國立中興大學附屬農業職業學校進修部::(401221)臺中市東區台中路283號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::僑泰高級中學進修部::(412016)臺中市大里區樹王路342號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立新民高級中學::(404426)臺中市北區健行路111號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立嶺東高級中學進修部::(408285)臺中市南屯區嶺東路2號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立光華高級工業職業學校::(411038)臺中市太平區東平路18號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::沙鹿工業高級中等學校進修部::(433029)臺中市沙鹿區臺灣大道七段823號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::嶺東高級中學::(408285)臺中市南屯區嶺東路2號": {
+    "lat": 24.1371616,
+    "lng": 120.610776,
+    "display": "嶺東高中, 2, 嶺東路, 春社里, 南屯區, 臺中市, 40852, 臺灣"
+  },
+  "school::明德高級中學::(402006)臺中市南區明德街84號": {
+    "lat": 24.905229,
+    "lng": 121.3651057,
+    "display": "新北市立明德高級中學, 993, 中正路二段, 大埔里, 三峽區, 大埔, 新北市, 23742, 臺灣"
+  },
+  "school::新民高級中學::(404426)臺中市北區健行路111號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::私立僑泰高級中學進修部::(412016)臺中市大里區樹王路342號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found"
+  },
+  "school::玉山高級中學::(423009)臺中市東勢區東崎路四段399號": {
+    "lat": 24.6266166,
+    "lng": 121.7952551,
+    "display": "慈心華德福實驗高中冬山校區, 257, 照安路, 南興村, 冬山鄉, 宜蘭縣, 269, 臺灣"
+  },
+  "school::慈明高級中學::臺中市太平區永隆里光德路388號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found",
+    "accuracy": "missing"
+  },
+  "school::私立嘉陽高級中學進修部::臺中市清水區中航路3段1號": {
+    "lat": null,
+    "lng": null,
+    "error": "not_found",
+    "accuracy": "missing"
+  }
+}
