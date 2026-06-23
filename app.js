@@ -6,7 +6,8 @@ const state = {
   selected: null,
   filter: "main",
   query: "",
-  exactOnly: false,
+  abcFilter: { a: "", b: "", c: "" },
+  pointFilter: { min: "", max: "" },
   editorUnlocked: false,
   saveMode: "server",
 };
@@ -14,6 +15,15 @@ const state = {
 const STORAGE_KEY = "dahua-admission-map-edits-v1";
 const PAYLOAD_STORAGE_KEY = "dahua-admission-map-payload-v1";
 const EDIT_PASSWORD = "22068816";
+const GRADE_POINTS = {
+  "A++": 21,
+  "A+": 18,
+  A: 15,
+  "B++": 12,
+  "B+": 9,
+  B: 6,
+  C: 3,
+};
 const TAICHUNG_CENTER = [24.205, 120.72];
 const TAICHUNG_BOUNDS = L.latLngBounds([24.02, 120.46], [24.38, 120.90]);
 const CLASSROOM = {
@@ -58,7 +68,17 @@ map.on("click", () => {
 const els = {
   summary: document.querySelector("#summaryText"),
   search: document.querySelector("#searchInput"),
-  exactOnly: document.querySelector("#exactOnly"),
+  filterA: document.querySelector("#filterA"),
+  filterB: document.querySelector("#filterB"),
+  filterC: document.querySelector("#filterC"),
+  filterError: document.querySelector("#filterError"),
+  filterPointMin: document.querySelector("#filterPointMin"),
+  filterPointMax: document.querySelector("#filterPointMax"),
+  subjectScores: [...document.querySelectorAll(".subject-score")],
+  writingScore: document.querySelector("#writingScore"),
+  myAbcText: document.querySelector("#myAbcText"),
+  myTotalPoints: document.querySelector("#myTotalPoints"),
+  applyMyScore: document.querySelector("#applyMyScore"),
   list: document.querySelector("#schoolList"),
   mappedCount: document.querySelector("#mappedCount"),
   recordCount: document.querySelector("#recordCount"),
@@ -179,18 +199,118 @@ function fmt(value) {
   return value === null || value === undefined ? "-" : value;
 }
 
+function calculateMyScore() {
+  const grades = els.subjectScores.map((select) => select.value);
+  const writing = els.writingScore.value;
+  if (grades.some((grade) => !grade) || writing === "") return null;
+
+  const counts = grades.reduce((acc, grade) => {
+    if (grade.startsWith("A")) acc.a += 1;
+    else if (grade.startsWith("B")) acc.b += 1;
+    else acc.c += 1;
+    return acc;
+  }, { a: 0, b: 0, c: 0 });
+  const totalPoints = grades.reduce((sum, grade) => sum + GRADE_POINTS[grade], 0) + Number(writing);
+  return { ...counts, totalPoints };
+}
+
+function renderMyScore() {
+  const score = calculateMyScore();
+  if (!score) {
+    els.myAbcText.textContent = "-";
+    els.myTotalPoints.textContent = "-";
+    els.applyMyScore.disabled = true;
+    return;
+  }
+  els.myAbcText.textContent = `${score.a}/${score.b}/${score.c}`;
+  els.myTotalPoints.textContent = score.totalPoints;
+  els.applyMyScore.disabled = false;
+}
+
+function applyMyScoreToFilters() {
+  const score = calculateMyScore();
+  if (!score) return;
+  els.filterA.value = String(score.a);
+  els.filterB.value = String(score.b);
+  els.filterC.value = String(score.c);
+  els.filterPointMin.value = "";
+  els.filterPointMax.value = String(score.totalPoints);
+  state.abcFilter = { a: String(score.a), b: String(score.b), c: String(score.c) };
+  state.pointFilter = { min: "", max: String(score.totalPoints) };
+  updateFilterError();
+  state.selected = null;
+  renderDetail(null);
+  render();
+}
+
+function normalizeSearch(value) {
+  return value
+    .toLowerCase()
+    .replaceAll("台", "臺")
+    .replace(/\s+/g, "");
+}
+
+function schoolAliases(schoolName) {
+  const aliases = [];
+  if (schoolName.includes("臺中第一")) aliases.push("一中", "臺中一中", "中一中");
+  if (schoolName.includes("臺中女子")) aliases.push("女中", "臺中女中", "中女中");
+  if (schoolName.includes("臺中第二")) aliases.push("二中", "臺中二中", "中二中");
+  if (schoolName.includes("臺中工業")) aliases.push("臺中高工", "中工");
+  if (schoolName.includes("臺中家事商業")) aliases.push("家商", "臺中家商");
+  if (schoolName.includes("豐原商業")) aliases.push("豐商");
+  if (schoolName.includes("大甲工業")) aliases.push("大甲高工");
+  if (schoolName.includes("沙鹿工業")) aliases.push("沙工");
+  return aliases;
+}
+
 function schoolMatches(school) {
-  const query = state.query.trim().toLowerCase();
+  const query = normalizeSearch(state.query.trim());
   const filterOk = state.filter === "all" || school.sourceGroup === state.filter;
-  const exactOk = !state.exactOnly || school.locationAccuracy === "exact";
-  if (!filterOk || !exactOk) return false;
+  const scoreOk = schoolMatchesScoreFilters(school);
+  if (!filterOk || !scoreOk) return false;
   if (!query) return true;
   const haystack = [
     school.school,
+    ...schoolAliases(school.school),
     school.address,
     ...school.departments.map((dept) => dept.name),
-  ].join(" ").toLowerCase();
-  return haystack.includes(query);
+  ].join(" ");
+  const normalizedHaystack = normalizeSearch(haystack);
+  const compactSchoolName = normalizeSearch(school.school.replace(/國立|私立|市立|臺中市立|高級中等學校|高級中學|職業學校/g, ""));
+  return normalizedHaystack.includes(query) || compactSchoolName.includes(query);
+}
+
+function abcFilterIsComplete() {
+  const { a, b, c } = state.abcFilter;
+  return a !== "" && b !== "" && c !== "";
+}
+
+function abcFilterIsValid() {
+  const { a, b, c } = state.abcFilter;
+  if (!abcFilterIsComplete()) return true;
+  return Number(a) + Number(b) + Number(c) === 5;
+}
+
+function recordMatchesScoreFilters(record) {
+  const { a, b, c } = state.abcFilter;
+  const { min, max } = state.pointFilter;
+  if (a !== "" && Number(record.aCount) !== Number(a)) return false;
+  if (b !== "" && Number(record.bCount) !== Number(b)) return false;
+  if (c !== "" && Number(record.cCount) !== Number(c)) return false;
+  if (min !== "" && Number(record.totalPoints) < Number(min)) return false;
+  if (max !== "" && Number(record.totalPoints) > Number(max)) return false;
+  return true;
+}
+
+function schoolMatchesScoreFilters(school) {
+  const { a, b, c } = state.abcFilter;
+  const { min, max } = state.pointFilter;
+  if (a === "" && b === "" && c === "" && min === "" && max === "") return true;
+  if (!abcFilterIsValid()) return false;
+  if (!pointFilterIsValid()) return false;
+  return school.departments.some((dept) =>
+    (dept.records || []).some((record) => recordMatchesScoreFilters(record))
+  );
 }
 
 function markerHtml(school) {
@@ -740,15 +860,65 @@ async function init() {
   render();
 }
 
-els.search.addEventListener("input", (event) => {
+function handleSearchChange(event) {
   state.query = event.target.value;
   render();
-});
+}
 
-els.exactOnly.addEventListener("change", (event) => {
-  state.exactOnly = event.target.checked;
-  render();
+els.search.addEventListener("input", handleSearchChange);
+els.search.addEventListener("search", handleSearchChange);
+
+els.subjectScores.forEach((select) => {
+  select.addEventListener("change", renderMyScore);
 });
+els.writingScore.addEventListener("change", renderMyScore);
+els.applyMyScore.addEventListener("click", applyMyScoreToFilters);
+
+function handleAbcFilterChange() {
+  state.abcFilter = {
+    a: els.filterA.value,
+    b: els.filterB.value,
+    c: els.filterC.value,
+  };
+  updateFilterError();
+  state.selected = null;
+  renderDetail(null);
+  render();
+}
+
+function handlePointFilterChange() {
+  state.pointFilter = {
+    min: els.filterPointMin.value.trim(),
+    max: els.filterPointMax.value.trim(),
+  };
+  updateFilterError();
+  state.selected = null;
+  renderDetail(null);
+  render();
+}
+
+function pointFilterIsValid() {
+  const { min, max } = state.pointFilter;
+  return min === "" || max === "" || Number(min) <= Number(max);
+}
+
+function updateFilterError() {
+  if (!abcFilterIsValid()) {
+    els.filterError.textContent = "A/B/C 三項都選擇時，加總必須等於 5。";
+    return;
+  }
+  if (!pointFilterIsValid()) {
+    els.filterError.textContent = "最低積點不可大於最高積點。";
+    return;
+  }
+  els.filterError.textContent = "";
+}
+
+els.filterA.addEventListener("change", handleAbcFilterChange);
+els.filterB.addEventListener("change", handleAbcFilterChange);
+els.filterC.addEventListener("change", handleAbcFilterChange);
+els.filterPointMin.addEventListener("input", handlePointFilterChange);
+els.filterPointMax.addEventListener("input", handlePointFilterChange);
 
 els.segments.forEach((button) => {
   button.addEventListener("click", () => {

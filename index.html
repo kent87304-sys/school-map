@@ -19,38 +19,184 @@
           </div>
         </header>
 
-        <section class="controls" aria-label="篩選">
-          <label class="search">
-            <span>搜尋</span>
-            <input id="searchInput" type="search" placeholder="學校、科系、地址" />
-          </label>
+        <section class="controls" aria-label="工具">
           <div class="segments" role="group" aria-label="資料範圍">
             <button class="segment active" data-filter="main" type="button">台中高中職</button>
             <button id="openTableEditor" class="segment editor-trigger" type="button">編輯資料</button>
           </div>
-          <label class="toggle">
-            <input id="exactOnly" type="checkbox" />
-            <span>只看精確定位</span>
-          </label>
+          <section class="score-card" aria-label="我的成績">
+            <div class="section-head">
+              <strong>我的成績</strong>
+              <span>輸入會考等級與作文</span>
+            </div>
+            <div class="score-grid">
+              <label>
+                <span>國文</span>
+                <select class="subject-score" data-subject="chinese">
+                  <option value="">未選</option>
+                  <option value="A++">A++</option>
+                  <option value="A+">A+</option>
+                  <option value="A">A</option>
+                  <option value="B++">B++</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </label>
+              <label>
+                <span>英語</span>
+                <select class="subject-score" data-subject="english">
+                  <option value="">未選</option>
+                  <option value="A++">A++</option>
+                  <option value="A+">A+</option>
+                  <option value="A">A</option>
+                  <option value="B++">B++</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </label>
+              <label>
+                <span>數學</span>
+                <select class="subject-score" data-subject="math">
+                  <option value="">未選</option>
+                  <option value="A++">A++</option>
+                  <option value="A+">A+</option>
+                  <option value="A">A</option>
+                  <option value="B++">B++</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </label>
+              <label>
+                <span>自然</span>
+                <select class="subject-score" data-subject="science">
+                  <option value="">未選</option>
+                  <option value="A++">A++</option>
+                  <option value="A+">A+</option>
+                  <option value="A">A</option>
+                  <option value="B++">B++</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </label>
+              <label>
+                <span>社會</span>
+                <select class="subject-score" data-subject="social">
+                  <option value="">未選</option>
+                  <option value="A++">A++</option>
+                  <option value="A+">A+</option>
+                  <option value="A">A</option>
+                  <option value="B++">B++</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+              </label>
+              <label>
+                <span>作文</span>
+                <select id="writingScore">
+                  <option value="">未選</option>
+                  <option value="6">6 級</option>
+                  <option value="5">5 級</option>
+                  <option value="4">4 級</option>
+                  <option value="3">3 級</option>
+                  <option value="2">2 級</option>
+                  <option value="1">1 級</option>
+                </select>
+              </label>
+            </div>
+            <div class="score-result">
+              <span>A/B/C <strong id="myAbcText">-</strong></span>
+              <span>總積點 <strong id="myTotalPoints">-</strong></span>
+            </div>
+            <button id="applyMyScore" class="apply-score" type="button" disabled>套用到篩選</button>
+          </section>
+          <section class="filter-card" aria-label="篩選">
+            <div class="filter-card-head">
+              <strong>篩選</strong>
+              <span>依學校、會考組合與積點查找</span>
+            </div>
+            <label class="search">
+              <span>搜尋</span>
+              <input id="searchInput" type="search" placeholder="學校、科系、地址" />
+            </label>
+            <div class="abc-filter" aria-label="A B C 成績篩選">
+              <label>
+                <span>A 數</span>
+                <select id="filterA">
+                  <option value="">不限</option>
+                  <option value="0">0A</option>
+                  <option value="1">1A</option>
+                  <option value="2">2A</option>
+                  <option value="3">3A</option>
+                  <option value="4">4A</option>
+                  <option value="5">5A</option>
+                </select>
+              </label>
+              <label>
+                <span>B 數</span>
+                <select id="filterB">
+                  <option value="">不限</option>
+                  <option value="0">0B</option>
+                  <option value="1">1B</option>
+                  <option value="2">2B</option>
+                  <option value="3">3B</option>
+                  <option value="4">4B</option>
+                  <option value="5">5B</option>
+                </select>
+              </label>
+              <label>
+                <span>C 數</span>
+                <select id="filterC">
+                  <option value="">不限</option>
+                  <option value="0">0C</option>
+                  <option value="1">1C</option>
+                  <option value="2">2C</option>
+                  <option value="3">3C</option>
+                  <option value="4">4C</option>
+                  <option value="5">5C</option>
+                </select>
+              </label>
+            </div>
+            <p id="filterError" class="filter-error" aria-live="polite"></p>
+            <div class="point-filter" aria-label="積點篩選">
+              <label>
+                <span>最低積點</span>
+                <input id="filterPointMin" type="number" min="0" max="111" inputmode="numeric" placeholder="不限" />
+              </label>
+              <label>
+                <span>最高積點</span>
+                <input id="filterPointMax" type="number" min="0" max="111" inputmode="numeric" placeholder="不限" />
+              </label>
+            </div>
+          </section>
         </section>
 
-        <section class="metrics" aria-label="統計">
-          <div>
-            <span id="mappedCount">0</span>
-            <small>地圖點位</small>
+        <section class="metrics-card" aria-label="統計">
+          <div class="section-head">
+            <strong>統計</strong>
           </div>
-          <div>
-            <span id="recordCount">0</span>
-            <small>成績筆數</small>
-          </div>
-          <div>
-            <span id="avgPoint">-</span>
-            <small>平均積點</small>
+          <div class="metrics">
+            <div>
+              <span id="mappedCount">0</span>
+              <small>地圖點位</small>
+            </div>
+            <div>
+              <span id="recordCount">0</span>
+              <small>成績筆數</small>
+            </div>
+            <div>
+              <span id="avgPoint">-</span>
+              <small>平均積點</small>
+            </div>
           </div>
         </section>
 
         <section class="list-wrap" aria-label="學校清單">
-          <div class="list-head">
+          <div class="section-head list-head">
             <strong>學校</strong>
             <span id="visibleCount">0</span>
           </div>
