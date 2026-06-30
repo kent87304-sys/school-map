@@ -67,6 +67,7 @@ map.on("click", () => {
 
 const els = {
   summary: document.querySelector("#summaryText"),
+  updated: document.querySelector("#updatedText"),
   search: document.querySelector("#searchInput"),
   filterA: document.querySelector("#filterA"),
   filterB: document.querySelector("#filterB"),
@@ -163,6 +164,17 @@ function loadStoredPayload() {
   }
 }
 
+function payloadTime(payload) {
+  const time = payload?.updatedAt ? Date.parse(payload.updatedAt) : 0;
+  return Number.isFinite(time) ? time : 0;
+}
+
+function choosePayload(fileData, storedData) {
+  if (!storedData) return fileData;
+  if (payloadTime(fileData) > payloadTime(storedData)) return fileData;
+  return { ...storedData, updatedAt: storedData.updatedAt || fileData.updatedAt };
+}
+
 function recalcSchool(school) {
   const records = school.departments.flatMap((dept) => dept.records || []);
   const points = records.map((record) => record.totalPoints).filter((value) => typeof value === "number");
@@ -197,6 +209,26 @@ function scoreClass(value) {
 
 function fmt(value) {
   return value === null || value === undefined ? "-" : value;
+}
+
+function formatUpdatedAt(value) {
+  if (!value) return "未記錄";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat("zh-TW", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(date);
+}
+
+function renderDataMeta() {
+  if (!state.dataPayload?.summary) return;
+  els.summary.textContent = `${state.dataPayload.summary.schools} 所學校，${state.dataPayload.summary.mapped} 所可上地圖`;
+  els.updated.textContent = `上次更新：${formatUpdatedAt(state.dataPayload.updatedAt)}`;
 }
 
 function calculateMyScore() {
@@ -449,14 +481,24 @@ function renderMetrics(schools) {
 }
 
 function recordRows(records) {
+  const points = records.map((record) => record.totalPoints).filter((value) => typeof value === "number");
+  const maxPoint = points.length ? Math.max(...points) : null;
+  const minPoint = points.length ? Math.min(...points) : null;
+  const hasLargeGap = maxPoint !== null && minPoint !== null && maxPoint - minPoint >= 15;
   return records
     .map((record) => {
       const subjects = Object.values(record.subjects).join(" / ");
       const noteText = [record.notes, record.special, record.reason].filter(Boolean).join(" ");
       const isSpecial = /原住民|低收|低收入|中低|弱勢|技藝|身障|身心障礙|特殊/.test(noteText);
-      const year = `${isSpecial ? "★ " : ""}${record.year}`;
+      const isLargeGap = hasLargeGap && typeof record.totalPoints === "number" && maxPoint - record.totalPoints >= 15;
+      const marks = `${isSpecial ? "★ " : ""}${isLargeGap ? "△ " : ""}`;
+      const title = [
+        isSpecial ? noteText : "",
+        isLargeGap ? `同科系積點落差較大：最高 ${maxPoint}，此筆 ${record.totalPoints}` : "",
+      ].filter(Boolean).join("；");
+      const year = `${marks}${record.year}`;
       return `
-        <tr class="${isSpecial ? "special-record" : ""}" title="${isSpecial ? noteText : ""}">
+        <tr class="${[isSpecial ? "special-record" : "", isLargeGap ? "gap-record" : ""].filter(Boolean).join(" ")}" title="${title}">
           <td>${year}</td>
           <td>${fmt(record.totalPoints)}</td>
           <td>${record.aCount}/${record.bCount}/${record.cCount}</td>
@@ -692,6 +734,7 @@ async function persistPayload(schools) {
   const records = schools.reduce((sum, school) => sum + school.recordCount, 0);
   const payload = {
     generatedFrom: state.dataPayload?.generatedFrom || "browser editor",
+    updatedAt: new Date().toISOString(),
     summary: { schools: schools.length, mapped, unmapped: schools.length - mapped, records },
     schools,
   };
@@ -762,7 +805,7 @@ async function saveTableEditor() {
   try {
     const schools = schoolsFromSheet();
     await persistPayload(schools);
-    els.summary.textContent = `${state.dataPayload.summary.schools} 所學校，${state.dataPayload.summary.mapped} 所可上地圖`;
+    renderDataMeta();
     els.tableEditStatus.textContent = state.saveMode === "server" ? "已儲存到網站資料" : "已儲存在此瀏覽器";
     els.tableEditor.close();
     state.selected = null;
@@ -849,12 +892,14 @@ async function init() {
     fetch("./data/schools.json"),
     fetch("./data/taichung-boundary.json"),
   ]);
-  const data = loadStoredPayload() || await response.json();
+  const fileData = await response.json();
+  const storedData = loadStoredPayload();
+  const data = choosePayload(fileData, storedData);
   const boundary = await boundaryResponse.json();
   state.dataPayload = data;
   state.baseSchools = data.schools;
   applyStoredEdits();
-  els.summary.textContent = `${data.summary.schools} 所學校，${data.summary.mapped} 所可上地圖`;
+  renderDataMeta();
   renderTaichungBoundary(boundary);
   renderClassroomMarker();
   render();

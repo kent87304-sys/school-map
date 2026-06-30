@@ -8,7 +8,7 @@
   --card: #ffffff;
   --card-hover: #f2f6ea;
   --button: #f4f6ee;
-  --blue: #5b7d33;
+  --blue: #2f6fbd;
   --green: #5b7d33;
   --deep-green: #5b7d33;
   --olive: #8f9a4f;
@@ -101,6 +101,11 @@ input {
   font-size: 13px;
 }
 
+.topbar .updated-text {
+  margin-top: 3px;
+  font-size: 12px;
+}
+
 .controls {
   display: grid;
   gap: 12px;
@@ -108,6 +113,7 @@ input {
 
 .score-card,
 .filter-card,
+.legend-card,
 .metrics-card,
 .list-wrap {
   display: grid;
@@ -117,6 +123,33 @@ input {
   border-radius: 8px;
   background: #fff;
   box-shadow: var(--section-shadow);
+}
+
+.legend-list {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.legend-list span {
+  display: block;
+}
+
+.legend-list strong {
+  display: inline-block;
+  min-width: 18px;
+  color: var(--green);
+  font-size: 15px;
+}
+
+.legend-list span:first-child strong {
+  color: #9a5b00;
+}
+
+.legend-list span:last-child strong {
+  color: #a64f23;
 }
 
 .score-grid {
@@ -583,6 +616,19 @@ input {
   font-weight: 700;
 }
 
+.record-table tr.gap-record td {
+  background: #f8eadf;
+}
+
+.record-table tr.gap-record td:first-child {
+  color: #a64f23;
+  font-weight: 700;
+}
+
+.record-table tr.special-record.gap-record td {
+  background: #f6dfc5;
+}
+
 .marker {
   display: grid;
   place-items: center;
@@ -619,7 +665,7 @@ input {
   height: 34px;
   border: 3px solid #fff;
   border-radius: 50%;
-  background: var(--green);
+  background: var(--blue);
   color: #fff;
   font-size: 15px;
   font-weight: 800;
