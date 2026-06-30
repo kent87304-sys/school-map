@@ -594,6 +594,43 @@ input {
   font-size: 12px;
 }
 
+.record-group {
+  display: grid;
+  gap: 6px;
+}
+
+.record-group + .record-group {
+  margin-top: 12px;
+}
+
+.record-group.historical {
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+
+.record-group-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.record-group-title span {
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+}
+
+.record-empty {
+  padding: 8px 6px;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .record-table th,
 .record-table td {
   padding: 6px 5px;

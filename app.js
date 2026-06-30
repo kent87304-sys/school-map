@@ -480,6 +480,11 @@ function renderMetrics(schools) {
   els.visibleCount.textContent = `${schools.length} 所`;
 }
 
+function recordYear(record) {
+  const match = String(record.year || "").match(/\d+/);
+  return match ? Number(match[0]) : 0;
+}
+
 function recordRows(records) {
   const points = records.map((record) => record.totalPoints).filter((value) => typeof value === "number");
   const maxPoint = points.length ? Math.max(...points) : null;
@@ -508,6 +513,63 @@ function recordRows(records) {
       `;
     })
     .join("");
+}
+
+function recordTable(records, emptyText = "沒有資料") {
+  if (!records.length) {
+    return `<div class="record-empty">${emptyText}</div>`;
+  }
+  return `
+    <table class="record-table">
+      <thead>
+        <tr><th>年</th><th>積點</th><th>A/B/C</th><th>五科</th><th>寫作</th></tr>
+      </thead>
+      <tbody>${recordRows(records)}</tbody>
+    </table>
+  `;
+}
+
+function splitRecentRecords(records) {
+  const years = [...new Set(records.map(recordYear).filter(Boolean))].sort((a, b) => b - a);
+  const recentYears = new Set(years.slice(0, 5));
+  const sorted = [...records].sort((a, b) => recordYear(b) - recordYear(a) || (a.totalPoints || 999) - (b.totalPoints || 999));
+  return {
+    recent: sorted.filter((record) => recentYears.has(recordYear(record))),
+    historical: sorted.filter((record) => !recentYears.has(recordYear(record))),
+    recentYearLabel: years.slice(0, 5).map((year) => `${year}年`).join("、"),
+  };
+}
+
+function departmentSection(dept) {
+  const { recent, historical, recentYearLabel } = splitRecentRecords(dept.records || []);
+  return `
+    <section class="dept">
+      <div class="dept-title">
+        <strong>${dept.name}</strong>
+        <span>平均 ${fmt(dept.avgTotalPoints)} / 最低 ${fmt(dept.minTotalPoints)}</span>
+      </div>
+      <div class="record-group">
+        <div class="record-group-title">
+          <strong>近五年</strong>
+          <span>${recentYearLabel || "無資料"}</span>
+        </div>
+        ${recordTable(recent, "沒有近五年資料")}
+      </div>
+      ${
+        historical.length
+          ? `
+            <div class="record-group historical">
+              <div class="record-group-title">
+                <strong>歷年資料</strong>
+                <span>${historical.length} 筆</span>
+              </div>
+              ${recordTable(historical)}
+            </div>
+          `
+          : ""
+      }
+    </section>
+  `;
 }
 
 function renderDetail(school) {
@@ -539,22 +601,7 @@ function renderDetail(school) {
       </div>
     </div>
     ${school.departments
-      .map(
-        (dept) => `
-          <section class="dept">
-            <div class="dept-title">
-              <strong>${dept.name}</strong>
-              <span>平均 ${fmt(dept.avgTotalPoints)} / 最低 ${fmt(dept.minTotalPoints)}</span>
-            </div>
-            <table class="record-table">
-              <thead>
-                <tr><th>年</th><th>積點</th><th>A/B/C</th><th>五科</th><th>寫作</th></tr>
-              </thead>
-              <tbody>${recordRows(dept.records)}</tbody>
-            </table>
-          </section>
-        `,
-      )
+      .map((dept) => departmentSection(dept))
       .join("")}
   `;
   els.detail.querySelector(".detail-close")?.addEventListener("click", () => {

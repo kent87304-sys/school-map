@@ -127,6 +127,13 @@ def lookup_address_info(school_name, current_lookup, address_lookup):
     return address_info, address
 
 
+def merge_extension_as_department(school_name, department):
+    if not school_name.endswith("進修部"):
+        return school_name, department, False
+    base_name = school_name.removesuffix("進修部")
+    return base_name, f"進修部｜{department}", True
+
+
 def is_taichung_school(school_name, address):
     if "臺中" in address or "台中" in address:
         return True
@@ -168,8 +175,9 @@ def build_site_payload():
     skipped = defaultdict(int)
 
     for row in rows:
-        school_name = text(row["學校"])
-        department = text(row["科系"])
+        original_school_name = text(row["學校"])
+        original_department = text(row["科系"])
+        school_name, department, is_extension = merge_extension_as_department(original_school_name, original_department)
         address_info, address = lookup_address_info(school_name, current_lookup, address_lookup)
 
         if not is_taichung_school(school_name, address):
@@ -237,6 +245,8 @@ def build_site_payload():
             "category": "高中職",
             "school": school_name,
             "originalSchool": text(row.get("原始學校名稱")),
+            "originalImportedSchool": original_school_name,
+            "originalDepartment": original_department if is_extension else "",
             "address": school.get("address", ""),
             "department": department,
             "subjects": subjects,
